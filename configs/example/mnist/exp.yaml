@@ -1,0 +1,46 @@
+# 1. Settings
+exp_name: "example" # name of experiment
+# 2. Basic args for FL
+rounds: 100 # communication rounds
+epochs: 5 # epochs of local update
+loss: 'CrossEntropyLoss' # loss fn name in torch.nn.*
+opt: 'Adam'  # optimizer name in torch.optim.*, e.g. Adam, SGD
+optim_kwargs: # args for optimizer
+  lr: 1e-6 # learning rate of local update
+batch_size: 32 # batch_size of local update
+sample_frac: 1.0 # select fraction of clients
+test_interval: 1 # test each round
+# 3. Optional args for FL algorithms
+# ----3.1 Args for Center
+center_update_samples: # if not None, means the used samples in each update epoch, recommend as None
+# ---- 3.2 Args for FedProx
+mu: 0.01   # coefficient for controlling client drift
+# ---- 3.3 Args for FedDF
+ensemble_epoch: 5
+ensemble_lr: 1e-8 # lr for ensemble, suggest lower than lr,
+distill_temperature: 20 # temperature for distillation
+# ---- 3.4 Args for FedGen
+#       note: distill_temperature s same as 3.3
+generative_alpha: 10.0  # hyperparameters for clients' local update
+generative_beta: 1.0  # hyperparameters for clients' local update
+gen_epochs: 10  # epochs for updating generator
+gen_lr: 1e-4  # lr for updating generator
+# ---- 3.5 Args for FedFTG
+#       note: gen_epochs, gen_lr is same as 3.4
+#             ensemble_epoch, ensemble_lr, distill_temperature is same as 3.3
+finetune_epochs: 1
+lambda_cls: 1. # hyperparameters of updating generator
+lambda_dis: 1. # hyperparameters of updating generator
+# ---- 3.6 Args for FedSR
+alpha_l2r: 0.01
+alpha_cmi: 0.001
+# ---- 3.7 Args for SFL
+propagation_hops: 2
+sfl_alpha: 1.0
+# ---- 3.8 Args for SG_FedX
+#       note: propagation_hops, sfl_alpha is same as 3.7
+hidden_alpha: 1.0
+# ---- 3.9 Args for IFCA
+k: 3  # number of clusters
+# ---- 3.10 Args for GFL-APPNP
+#       note: propagation_hops, alpha is same as 3.7
